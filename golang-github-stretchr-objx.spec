@@ -5,12 +5,12 @@
 
 Name:           golang-github-stretchr-objx
 Version:        0
-Release:        0.2.git%{shortcommit}%{?dist}
+Release:        0.3.git%{shortcommit}%{?dist}
 Summary:        Go package for dealing with maps, slices, JSON and other data
 License:        MIT
 URL:            http://godoc.org/%{import_path}
 Source0:        https://%{import_path}/archive/%{commit}/objx-%{shortcommit}.tar.gz
-BuildArch:      noarch
+ExclusiveArch:  %{ix86} x86_64 %{arm}
 
 %description
 Objx provides the `objx.Map` type, which is a `map[string]interface{}` that
@@ -54,6 +54,9 @@ cp -pav codegen %{buildroot}/%{gopath}/src/%{import_path}/
 %{gopath}/src/%{import_path}/codegen/*
 
 %changelog
+* Tue Oct 14 2014 jchaloup <jchaloup@redhat.com> - 0-0.3.gitcbeaeb1
+- BuildArch to ExclusiveArch
+
 * Mon Sep 15 2014 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0-0.2.gitcbeaeb1
 - do not redefine gopath
 
