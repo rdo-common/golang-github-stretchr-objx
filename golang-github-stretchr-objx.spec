@@ -1,16 +1,25 @@
 %global debug_package   %{nil}
-%global import_path     github.com/stretchr/objx
+%global provider        github
+%global provider_tld    com
+%global project         stretchr
+%global repo            objx
+# https://github.com/stretchr/objx
+%global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
 %global commit          cbeaeb16a013161a98496fad62933b1d21786672
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
-Name:           golang-github-stretchr-objx
+Name:           golang-%{provider}-%{project}-%{repo}
 Version:        0
 Release:        0.3.git%{shortcommit}%{?dist}
 Summary:        Go package for dealing with maps, slices, JSON and other data
 License:        MIT
 URL:            http://godoc.org/%{import_path}
-Source0:        https://%{import_path}/archive/%{commit}/objx-%{shortcommit}.tar.gz
+Source0:        https://%{import_path}/archive/%{commit}/%{repo}-%{shortcommit}.tar.gz
+%if 0%{?fedora} >= 19 || 0%{?rhel} >= 7
+BuildArch:      noarch
+%else
 ExclusiveArch:  %{ix86} x86_64 %{arm}
+%endif
 
 %description
 Objx provides the `objx.Map` type, which is a `map[string]interface{}` that
@@ -32,7 +41,7 @@ quickly get access to data within the map, without having to worry too much
 about type assertions, missing data, default values etc. 
 
 %prep
-%setup -q -n objx-%{commit}
+%setup -q -n %{repo}-%{commit}
 
 %build
 
@@ -48,10 +57,8 @@ cp -pav codegen %{buildroot}/%{gopath}/src/%{import_path}/
 
 %files devel
 %doc LICENSE.md README.md
-%dir %{gopath}/src/%{import_path}
-%dir %{gopath}/src/%{import_path}/codegen
-%{gopath}/src/%{import_path}/*
-%{gopath}/src/%{import_path}/codegen/*
+%dir %{gopath}/src/%{provider}.%{provider_tld}/%{project}
+%{gopath}/src/%{import_path}
 
 %changelog
 * Tue Oct 14 2014 jchaloup <jchaloup@redhat.com> - 0-0.3.gitcbeaeb1
