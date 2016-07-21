@@ -40,7 +40,7 @@
 
 Name:           golang-%{provider}-%{project}-%{repo}
 Version:        0
-Release:        0.6.git%{shortcommit}%{?dist}
+Release:        0.7.git%{shortcommit}%{?dist}
 Summary:        Go package for dealing with maps, slices, JSON and other data
 License:        MIT
 URL:            http://godoc.org/%{import_path}
@@ -184,6 +184,9 @@ gotest %{import_path}
 %endif
 
 %changelog
+* Thu Jul 21 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0-0.7.gitcbeaeb1
+- https://fedoraproject.org/wiki/Changes/golang1.7
+
 * Mon Feb 22 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0-0.6.gitcbeaeb1
 - https://fedoraproject.org/wiki/Changes/golang1.6
 
