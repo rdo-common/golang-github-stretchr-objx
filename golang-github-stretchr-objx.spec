@@ -39,12 +39,12 @@
 # https://github.com/stretchr/objx
 %global provider_prefix %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path     %{provider_prefix}
-%global commit          cbeaeb16a013161a98496fad62933b1d21786672
+%global commit          1a9d0bb9f541897e62256577b352fdbc1fb4fd94
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
 
 Name:           golang-%{provider}-%{project}-%{repo}
 Version:        0
-Release:        0.11.git%{shortcommit}%{?dist}
+Release:        0.12.git%{shortcommit}%{?dist}
 Summary:        Go package for dealing with maps, slices, JSON and other data
 License:        MIT
 URL:            http://godoc.org/%{import_path}
@@ -67,10 +67,7 @@ Summary:       %{summary}
 BuildArch:     noarch
 
 %if 0%{?with_check}
-BuildRequires: golang(github.com/stretchr/testify/assert)
 %endif
-
-Requires:      golang(github.com/stretchr/testify/assert)
 
 Provides:      golang(%{import_path}) = %{version}-%{release}
 
@@ -170,6 +167,10 @@ export GOPATH=%{buildroot}/%{gopath}:$(pwd)/Godeps/_workspace:%{gopath}
 %endif
 
 %changelog
+* Tue Sep 12 2017 Jan Chaloupka <jchaloup@redhat.com> - 0-0.12.git1a9d0bb
+- Bump to upstream 1a9d0bb9f541897e62256577b352fdbc1fb4fd94
+  resolves: #1490415
+
 * Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0-0.11.gitcbeaeb1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
